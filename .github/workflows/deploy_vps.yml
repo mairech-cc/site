@@ -57,6 +57,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: vite-build
+        path: dist
 
     - name: Set up SSH key
       uses: webfactory/ssh-agent@v0.5.3
