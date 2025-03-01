@@ -16,6 +16,14 @@ This repository contains copyright contents, it's intended for humoristic purpos
 
 ## Development
 
+You must have Node.js 22. [Download](https://nodejs.org/en/download)
+
+To instal `pnpm` (recommanded) :
+
+~~~bash
+$ corepack enable pnpm
+~~~
+
 To develop `mairech.cc` on your computer :
 
 ~~~bash

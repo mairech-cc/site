@@ -17,6 +17,14 @@ uniquement à but humouriste, ce qui est permis dans le droit français.
 
 ## Développement
 
+Vous devez avoir Node.js 22. [Télécharger](https://nodejs.org/fr/download)
+
+Pour installer `pnpm` (recommandé) :
+
+~~~bash
+$ corepack enable pnpm
+~~~
+
 Pour développer `mairech.cc` sur votre machine :
 
 ~~~bash
