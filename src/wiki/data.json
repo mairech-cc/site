@@ -1,0 +1,10 @@
+{
+  "categories": {
+    "main": "Pages principales"
+  },
+  "engines": {
+    "react": "le moteur natif React ⚡️",
+    "markdown": "le moteur modifié Markdown 💪",
+    "unknown": "un moteur inconnu 🪫"
+  }
+}
