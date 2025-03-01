@@ -1,4 +1,4 @@
-module.exports = ({ github }) => {
+module.exports = ({ github, context }) => {
   const fs = require('fs');
 
   const tscOutput = fs.readFileSync('tsc_output.txt', 'utf8').trim();
