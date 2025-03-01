@@ -40,12 +40,12 @@ jobs:
       - name: Run TypeScript Check
         id: tsc
         run: |
-          pnpm --silent tsc --noEmit > tsc_output.txt 2>&1 || true
+          pnpm --silent --use-stderr tsc --noEmit > tsc_output.txt 2>&1 || true
 
       - name: Run ESLint
         id: eslint
         run: |
-          pnpm --silent lint --max-warnings=0 > eslint_output.txt 2>&1 || true
+          pnpm --silent --use-stderr lint --max-warnings=0 > eslint_output.txt 2>&1 || true
 
       - name: Comment TS + ESLint Results on PR
         uses: actions/github-script@v6
