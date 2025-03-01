@@ -66,8 +66,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
-            const { context, github } = require('@actions/github');
-
+            
             // Read TypeScript errors
             const tscOutput = fs.readFileSync('tsc_output.txt', 'utf8').trim();
             const tscErrors = tscOutput.includes("error TS") ? `### ❌ TypeScript Errors\n\`\`\`\n${tscOutput}\n\`\`\`` : "✅ No TypeScript errors found.";
