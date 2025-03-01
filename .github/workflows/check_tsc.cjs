@@ -1,10 +1,12 @@
-module.exports = ({ github, context }) => {
-  const fs = require('fs');
+const path = require("path");
 
-  const tscOutput = fs.readFileSync('tsc_output.txt', 'utf8').trim();
+module.exports = ({ github, context, root }) => {
+  const fs = require("fs");
+
+  const tscOutput = fs.readFileSync(path.resolve(root, "tsc_output.txt"), "utf8").trim();
   const tscErrors = `### 🐞 TypeScript output\n\n~~~\n${tscOutput}\n~~~`;
 
-  const lintOutput = fs.readFileSync('eslint_output.txt', 'utf8').trim();
+  const lintOutput = fs.readFileSync(path.resolve(root, "eslint_output.txt"), "utf8").trim();
   const lintErrors = `### 🪄 ESLint output\n\n~~~\n${tscOutput}\n~~~`; lintOutput.includes("error") ? `### ❌ ESLint Errors\n\`\`\`\n${lintOutput}\n\`\`\`` : "✅ No ESLint errors found.";
 
   const finalMessage = `${tscErrors}\n\n${lintErrors}`;

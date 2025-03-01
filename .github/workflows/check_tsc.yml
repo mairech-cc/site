@@ -52,5 +52,6 @@ jobs:
         if: always()
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script:
-            require('./.github/workflows/check_tsc.cjs')({ github, context });
+          script: |
+            const path = require("path");
+            require('./.github/workflows/check_tsc.cjs')({ github, context, root: path.resolve("./") });
