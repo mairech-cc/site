@@ -59,17 +59,18 @@ jobs:
         name: vite-build
         path: dist
 
-    - name: Add VPS host to known hosts
+    - name: Configure SSH
       run: |
-        mkdir -p ~/.ssh  # Ensure the .ssh directory exists
+        mkdir -p ~/.ssh
         ssh-keyscan -t rsa ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
         ssh-keyscan -t ed25519 ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+        echo "${{ secrets.SSH_PRIVATE_KEY }}"" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        chmod 644 ~/.ssh/known_hosts
 
     - name: Upload artifacts to VPS
       run: |
-        scp -r ./dist/* ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        scp -i ~/.ssh/id_ed25519 -r ./dist/* ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
 
     - name: Verify deployment
       run: |
