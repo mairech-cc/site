@@ -59,13 +59,10 @@ jobs:
         name: vite-build
         path: dist
 
-    - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
     - name: Upload artifacts to VPS
       run: |
+        ssh-keyscan -t rsa ${{ secrets.VPS_HOST }} | tee -a ~/.ssh/known_host
+        ssh-keyscan -t ed25519 ${{ secrets.VPS_HOST }} | tee -a ~/.ssh/known_host
         scp -r ./dist/* ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
