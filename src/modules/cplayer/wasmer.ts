@@ -33,7 +33,6 @@ export function useWasmerPackage(specifier: string): [false | Wasmer, () => void
     }
 
     promiseCache[specifier] = Wasmer.fromRegistry(specifier).then(v => {
-      console.log(v);
       setPak(cache[specifier] = v);
       promiseCache[specifier] = undefined;
       return v;
