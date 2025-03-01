@@ -1,0 +1,87 @@
+name: Check TS + ESLint
+
+on:
+  pull_request:
+    branches:
+      - main
+      - prod
+
+jobs:
+  typescript-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install pnpm
+        run: corepack enable pnpm
+
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run TypeScript Check
+        id: tsc
+        run: |
+          pnpm tsc --noEmit > tsc_output.txt 2>&1 || true
+
+      - name: Run ESLint
+        id: eslint
+        run: |
+          pnpm lint --max-warnings=0 > eslint_output.txt 2>&1 || true
+
+      - name: Check for TypeScript Errors
+        id: check-tsc
+        run: |
+          if grep -q "error TS" tsc_output.txt; then
+            echo "TypeScript errors detected!"
+            exit 1
+          fi
+
+      - name: Check for ESLint Errors (Ignoring Warnings)
+        id: check-eslint
+        run: |
+          if grep -q "error" eslint_output.txt; then
+            echo "ESLint errors detected!"
+            exit 1
+          fi
+
+      - name: Comment TS + ESLint Results on PR
+        uses: actions/github-script@v6
+        if: always()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const { context, github } = require('@actions/github');
+
+            // Read TypeScript errors
+            const tscOutput = fs.readFileSync('tsc_output.txt', 'utf8').trim();
+            const tscErrors = tscOutput.includes("error TS") ? `### ❌ TypeScript Errors\n\`\`\`\n${tscOutput}\n\`\`\`` : "✅ No TypeScript errors found.";
+
+            // Read ESLint errors
+            const lintOutput = fs.readFileSync('eslint_output.txt', 'utf8').trim();
+            const lintErrors = lintOutput.includes("error") ? `### ❌ ESLint Errors\n\`\`\`\n${lintOutput}\n\`\`\`` : "✅ No ESLint errors found.";
+
+            // Combine both messages
+            const finalMessage = `${tscErrors}\n\n${lintErrors}`;
+
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: finalMessage
+            });
