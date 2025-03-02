@@ -42,7 +42,7 @@ export function WinnieAnimation({ src }: { src: string; }) {
       audio.remove();
       window.removeEventListener("resize", updateSizes);
     };
-  }, []);
+  }, [updateSizes]);
 
   useEffect(() => {
     requestAnimationFrame(() => {
