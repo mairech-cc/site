@@ -70,7 +70,10 @@ jobs:
 
     - name: Upload artifacts to VPS
       run: |
-        scp -i ~/.ssh/id_ed25519 -r ./dist/* ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
+        # Updates the files in the dist/ directory
+        rsync -avz -e "ssh -i ~/.ssh/id_ed25519" --exclude=assets/ ./dist/ ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
+        # Updates the files in the assets/ directory ignoring existing files (since hash is used for filenames)
+        rsync -avz -e "ssh -i ~/.ssh/id_ed25519" --ignore-existing ./dist/assets/ ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/assets/
 
     - name: Verify deployment
       run: |
