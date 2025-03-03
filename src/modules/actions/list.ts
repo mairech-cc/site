@@ -20,6 +20,7 @@ import boberMp3 from "../../assets/bober.mp3";
 import duoCorrectMp3 from "../../assets/duo-correct.mp3";
 import deathFortniteMp3 from "../../assets/death-fortnite.mp3";
 import metalPipeMp3 from "../../assets/metal-pipe.mp3";
+import animeWowMp3 from "../../assets/anime-wow.mp3";
 
 export type Action = {
   description: string;
@@ -204,5 +205,12 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["m"],
     authors: ["Mathias"],
     action: ["play", metalPipeMp3],
+  },
+  wow: {
+    description: "Anime Wow",
+    type: "keys",
+    keys: ["Shift+w"],
+    authors: ["Mathias"],
+    action: ["play", animeWowMp3],
   },
 };
