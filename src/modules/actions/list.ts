@@ -18,6 +18,7 @@ import chipiMp3 from "../../assets/chipi.mp3";
 import phMp3 from "../../assets/ph.mp3";
 import boberMp3 from "../../assets/bober.mp3";
 import duoCorrectMp3 from "../../assets/duo-correct.mp3";
+import deathFortniteMp3 from "../../assets/death-fortnite.mp3";
 
 export type Action = {
   description: string;
@@ -188,5 +189,12 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["d"],
     authors: ["Mathias"],
     action: ["play", duoCorrectMp3],
+  },
+  death: {
+    description: "Death Fortnite",
+    type: "keys",
+    keys: ["f"],
+    authors: ["Mathias"],
+    action: ["play", deathFortniteMp3],
   }
 };
