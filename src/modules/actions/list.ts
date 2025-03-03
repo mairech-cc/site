@@ -19,6 +19,7 @@ import phMp3 from "../../assets/ph.mp3";
 import boberMp3 from "../../assets/bober.mp3";
 import duoCorrectMp3 from "../../assets/duo-correct.mp3";
 import deathFortniteMp3 from "../../assets/death-fortnite.mp3";
+import metalPipeMp3 from "../../assets/metal-pipe.mp3";
 
 export type Action = {
   description: string;
@@ -196,5 +197,12 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["f"],
     authors: ["Mathias"],
     action: ["play", deathFortniteMp3],
-  }
+  },
+  metalpipe: {
+    description: "Metal Pipe",
+    type: "keys",
+    keys: ["m"],
+    authors: ["Mathias"],
+    action: ["play", metalPipeMp3],
+  },
 };
