@@ -21,6 +21,7 @@ import duoCorrectMp3 from "../../assets/duo-correct.mp3";
 import deathFortniteMp3 from "../../assets/death-fortnite.mp3";
 import metalPipeMp3 from "../../assets/metal-pipe.mp3";
 import animeWowMp3 from "../../assets/anime-wow.mp3";
+import enfantsDuRnMp3 from "../../assets/enfant-du-rn.mp3";
 
 export type Action = {
   description: string;
@@ -212,5 +213,12 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["Shift+w"],
     authors: ["Mathias"],
     action: ["play", animeWowMp3],
+  },
+  rn: {
+    description: "Enfants du Rn",
+    type: "keys",
+    keys: ["r"],
+    authors: ["Mathias"],
+    action: ["play", enfantsDuRnMp3],
   },
 };
