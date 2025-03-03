@@ -17,6 +17,7 @@ import zemmourMp3 from "../../assets/zemmour.mp3";
 import chipiMp3 from "../../assets/chipi.mp3";
 import phMp3 from "../../assets/ph.mp3";
 import boberMp3 from "../../assets/bober.mp3";
+import duoCorrectMp3 from "../../assets/duo-correct.mp3";
 
 export type Action = {
   description: string;
@@ -180,5 +181,12 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["b"],
     authors: ["Mathias"],
     action: ["play", boberMp3],
+  },
+  duo: {
+    description: "Duo correct",
+    type: "keys",
+    keys: ["d"],
+    authors: ["Mathias"],
+    action: ["play", duoCorrectMp3],
   }
 };
