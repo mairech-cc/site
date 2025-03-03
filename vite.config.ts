@@ -62,6 +62,10 @@ export default defineConfig({
   },
   server: {
     headers: {
+      "Access-Control-Allow-Headers": "DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type, Range",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Expose-Headers": "Content-Length, Content-Range",
       "Cross-Origin-Opener-Policy": "same-origin",
       "Cross-Origin-Embedder-Policy": "require-corp"
     }
