@@ -23,6 +23,8 @@ import metalPipeMp3 from "../../assets/metal-pipe.mp3";
 import animeWowMp3 from "../../assets/anime-wow.mp3";
 import enfantsDuRnMp3 from "../../assets/enfant-du-rn.mp3";
 import nootCenaMp3 from "../../assets/noot-cena.mp3";
+import uwuMp3 from "../../assets/uwu.mp3";
+import araAraMp3 from "../../assets/ara-ara.mp3";
 
 export type Action = {
   description: string;
@@ -228,5 +230,19 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["n"],
     authors: ["Mathias"],
     action: ["play", nootCenaMp3],
+  },
+  uwu: {
+    description: "🥺👉👈",
+    type: "keys",
+    keys: ["u"],
+    authors: ["Mathias"],
+    action: ["play", uwuMp3],
+  },
+  araara: {
+    description: "Ara ara ~~~~",
+    type: "keys",
+    keys: ["Shift+a"],
+    authors: ["Mathias"],
+    action: ["play", araAraMp3],
   },
 };
