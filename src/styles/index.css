@@ -42,6 +42,7 @@ h1 {
 h2 {
   font-family: "Newsreader", serif;
   font-size: 2em;
+  margin-bottom: 0;
 }
 
 @media (prefers-color-scheme: light) {
