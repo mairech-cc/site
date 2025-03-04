@@ -111,14 +111,14 @@ function App() {
             <span ref={refs.firstnames}>Mathias</span>.
           </p>
 
-          <Section title="Enquête">
+          <Section title="mairech.cc est maintenant en source ouverte">
             <p>
-              Une enquête est ouverte pour améliorer <code>mairech.cc</code>.
+              <code>mairech.cc</code> est maintenant disponible en source ouverte sur GitHub.
             </p>
 
-            <a href="https://mairech.cc/survey" target="_blank">
+            <a href="https://mairech.cc/github" target="_blank">
               <Button>
-                Participer
+                Voir
               </Button>
             </a>
           </Section>
