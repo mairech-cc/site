@@ -1,5 +1,7 @@
 import { memo, useEffect, useMemo, useState, type ComponentType } from "react";
 import { render } from "katex";
+import { useNavigate } from "react-router";
+import { shiki } from "../modules/cplayer/utils";
 import { categories, engines } from "./data.json";
 
 const metadatas: Record<string, Record<string, unknown>> = {};
@@ -14,8 +16,6 @@ bindPage("main", mainPage.attributes, mainPage.html, mainPage.toc, "markdown");
 
 import { AnnalesPage } from "./pages/annales";
 import { attributes as annalesAttributes, toc as annalesToc } from "./pages/annales-data";
-import { useNavigate } from "react-router";
-import { shiki } from "../modules/cplayer/utils";
 bindPage("annales", annalesAttributes, AnnalesPage, annalesToc, "react");
 
 function bindPage(key: string, metadata: Record<string, unknown>, page: string | ComponentType, content: {
