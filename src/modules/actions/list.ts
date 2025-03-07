@@ -26,6 +26,9 @@ import nootCenaMp3 from "../../assets/noot-cena.mp3";
 import uwuMp3 from "../../assets/uwu.mp3";
 import araAraMp3 from "../../assets/ara-ara.mp3";
 import pasNetMp3 from "../../assets/pas-net.mp3";
+import ouiOuiMp3 from "../../assets/oui-oui.mp3";
+import yeahBoiMp3 from "../../assets/yeah-boi.mp3";
+import babySharkMp3 from "../../assets/baby-shark.mp3";
 
 export type Action = {
   description: string;
@@ -93,6 +96,7 @@ export const ACTIONS: Record<string, Action> = {
       minecraftHitMp3,
       mario64OofMp3,
       ninjagoLowBudgetMp3,
+      yeahBoiMp3,
     ]],
   },
   konami: {
@@ -156,7 +160,7 @@ export const ACTIONS: Record<string, Action> = {
     action: ["play", weedMp3],
   },
   shrek: {
-    description: "Somebody wants",
+    description: "Somebody once",
     type: "keys",
     keys: ["s"],
     authors: ["Anthony"],
@@ -252,5 +256,19 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["Shift+b"],
     authors: ["Louis"],
     action: ["play", pasNetMp3],
+  },
+  ouioui: {
+    description: "OUI VASY OUI-OUI",
+    type: "keys",
+    keys: ["o"],
+    authors: ["Mathias"],
+    action: ["play", ouiOuiMp3],
+  },
+  babyshark: {
+    description: "🦈",
+    type: "keys",
+    keys: ["Ctrl+b"],
+    authors: ["Mathias"],
+    action: ["play", babySharkMp3],
   },
 };
