@@ -250,7 +250,7 @@ export const ACTIONS: Record<string, Action> = {
     description: "Baptiste",
     type: "keys",
     keys: ["Shift+b"],
-    authors: ["Juliano"],
+    authors: ["Louis"],
     action: ["play", pasNetMp3],
   },
 };
