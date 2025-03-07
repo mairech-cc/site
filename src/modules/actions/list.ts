@@ -28,6 +28,7 @@ import araAraMp3 from "../../assets/ara-ara.mp3";
 import pasNetMp3 from "../../assets/pas-net.mp3";
 import ouiOuiMp3 from "../../assets/oui-oui.mp3";
 import yeahBoiMp3 from "../../assets/yeah-boi.mp3";
+import babySharkMp3 from "../../assets/baby-shark.mp3";
 
 export type Action = {
   description: string;
@@ -262,5 +263,12 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["o"],
     authors: ["Mathias"],
     action: ["play", ouiOuiMp3],
+  },
+  babyshark: {
+    description: "🦈",
+    type: "keys",
+    keys: ["Ctrl+b"],
+    authors: ["Mathias"],
+    action: ["play", babySharkMp3],
   },
 };
