@@ -25,6 +25,7 @@ import enfantsDuRnMp3 from "../../assets/enfant-du-rn.mp3";
 import nootCenaMp3 from "../../assets/noot-cena.mp3";
 import uwuMp3 from "../../assets/uwu.mp3";
 import araAraMp3 from "../../assets/ara-ara.mp3";
+import pasNetMp3 from "../../assets/pas-net.mp3";
 
 export type Action = {
   description: string;
@@ -244,5 +245,12 @@ export const ACTIONS: Record<string, Action> = {
     keys: ["Shift+a"],
     authors: ["Mathias"],
     action: ["play", araAraMp3],
+  },
+  basptiste: {
+    description: "Baptiste",
+    type: "keys",
+    keys: ["Shift+b"],
+    authors: ["Juliano"],
+    action: ["play", pasNetMp3],
   },
 };
