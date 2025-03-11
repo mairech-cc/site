@@ -1,6 +1,6 @@
 import "katex/dist/katex.min.css";
 
-import confettiMp3 from "./assets/confetti.mp3";
+import confettiMp3 from "./assets/sounds/confetti.mp3";
 
 import { Link, useParams } from "react-router";
 import { Global } from "@emotion/react";
