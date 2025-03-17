@@ -13,6 +13,7 @@ import { useConfetti } from "./modules/confetti";
 import { Help } from "./modules/help/main";
 import { Discord } from "./modules/discord";
 import { IconInfoCircle } from "@tabler/icons-react";
+import { useSetMainScrollElement } from "./modules/scroll/ctx";
 
 export default function Wiki() {
   const confetti = useConfetti();
@@ -65,6 +66,8 @@ export default function Wiki() {
       </>
     );
   }, [pageId, title, setTitle]);
+
+  const setMainScrollElement = useSetMainScrollElement();
 
   const handler = useActionsRouter(() => ({
     confetti() {
@@ -226,6 +229,7 @@ export default function Wiki() {
                   margin: 0,
                 }
               }}
+              ref={setMainScrollElement}
             >
               {body}
             </div>
