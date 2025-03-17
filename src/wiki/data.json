@@ -1,6 +1,7 @@
 {
   "categories": {
-    "main": "Pages principales"
+    "main": "Pages principales",
+    "compounds": "Composants"
   },
   "engines": {
     "react": "le moteur natif React ⚡️",
