@@ -422,26 +422,21 @@ export function AnnalesPage() {
               {" - "}
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2023-metropole-corrige.pdf" target="_blank">Corrigé</a>
             </td>
-            <td>
+            <td rowSpan={2}>
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2023-lareunion-sujet.pdf" target="_blank">Sujet</a>
             </td>
-            <td>-</td>
-            <td>
+            <td rowSpan={2}>-</td>
+            <td rowSpan={2}>
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2023-nouvellecaledonie-sujet.pdf" target="_blank">Sujet</a>
             </td>
-            <td>-</td>
-            <td>-</td>
+            <td rowSpan={2}>-</td>
+            <td rowSpan={2}>-</td>
           </tr>
           <tr>
             <td colSpan={2}>
               {"Remplacement : "}
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2023-metropole-remplacement-sujet.pdf" target="_blank">Sujet</a>
             </td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
           </tr>
 
           {/* 2022 */}
@@ -452,30 +447,25 @@ export function AnnalesPage() {
               {" - "}
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2022-metropole-corrige.pdf" target="_blank">Corrigé</a>
             </td>
-            <td>-</td>
-            <td>
+            <td rowSpan={2}>-</td>
+            <td rowSpan={2}>
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2022-mayotteliban-sujet.pdf" target="_blank">Sujet</a>
               {" - "}
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2022-mayotteliban-corrige.pdf" target="_blank">Corrigé</a>
             </td>
-            <td>-</td>
-            <td>
+            <td rowSpan={2}>-</td>
+            <td rowSpan={2}>
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2022-polynesie-sujet.pdf" target="_blank">Sujet</a>
               {" - "}
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2022-polynesie-corrige.pdf" target="_blank">Corrigé</a>
             </td>
-            <td>-</td>
+            <td rowSpan={2}>-</td>
           </tr>
           <tr>
             <td colSpan={2}>
               {"Remplacement : "}
               <a href="https://cdn.julman.fr/bucket/phymat-sujets/2022-metropole-remplacement-sujet.pdf" target="_blank">Sujet</a>
             </td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
           </tr>
 
           {/* 2021 */}
