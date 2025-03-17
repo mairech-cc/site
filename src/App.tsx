@@ -1,5 +1,5 @@
 import winnie from "./assets/winnie.gif";
-import confettiMp3 from "./assets/confetti.mp3";
+import confettiMp3 from "./assets/sounds/confetti.mp3";
 
 import { useCallback, useEffect, useState } from "react";
 import { useConfetti } from "./modules/confetti";

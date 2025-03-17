@@ -4,8 +4,9 @@ import { lazy, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import { ConfettiContext } from "./modules/confetti.ts";
+import { ConfettiContext } from "./modules/confetti";
 import { BrowserRouter, Route, Routes } from "react-router";
+import { ScrollToTop } from "./modules/scroll/scroll-to-top";
 
 const App = lazy(() => import("./App.tsx"));
 const Wiki = lazy(() => import("./Wiki.tsx"));
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
     <CacheProvider value={cache}>
       <ConfettiContext>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route index element={<App />} />
 

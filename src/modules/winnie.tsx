@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { clamp, Vec2 } from "../utils/math";
-import gangnamStylePhonkMp3 from "../assets/gangnam-style-phonk.mp3";
+import gangnamStylePhonkMp3 from "../assets/sounds/gangnam-style-phonk.mp3";
 
 const LASER_OPEN_ANGLE = Math.PI / 26;
 
