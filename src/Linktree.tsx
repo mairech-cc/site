@@ -212,6 +212,7 @@ export default function Linktree() {
                   transition: "font-size .2s ease-in-out",
 
                   "&:hover": {
+                    color: "#fff",
                     opacity: 0.8,
 
                     "@media not (prefers-reduced-motion)": {
