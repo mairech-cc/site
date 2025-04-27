@@ -10,6 +10,7 @@ import BaseLayout from "./layout.tsx";
 
 const App = lazy(() => import("./App.tsx"));
 const Wiki = lazy(() => import("./Wiki.tsx"));
+const Linktree = lazy(() => import("./Linktree.tsx"));
 
 const cache = createCache({ key: "mairech-cc" });
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/wiki/:page?",
         Component: Wiki,
+      },
+      {
+        path: "/@/:page",
+        Component: Linktree,
       },
     ]
   },
