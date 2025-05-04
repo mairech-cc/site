@@ -14,6 +14,7 @@ import { Help } from "./modules/help/main";
 import { Discord } from "./modules/discord";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { useSetMainScrollElement } from "./modules/scroll/ctx";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Wiki() {
   const confetti = useConfetti();
@@ -174,23 +175,50 @@ export default function Wiki() {
                   Table des matières
                 </h2>
 
-                {tableOfContent ? (
-                  tableOfContent.map(({ level, content }, i) => (
-                    <a
-                      key={i}
-                      href={`#section-${i}`}
+                <div
+                  css={{
+                    display: "grid",
+                    gridTemplateAreas: '"a"',
+                    alignContent: "center",
+                  }}
+                >
+                  <AnimatePresence>
+                    <motion.div
+                      key={JSON.stringify(tableOfContent)}
+                      // transition={{ duration: 3 }}
+                      initial={{ opacity: 0, x: -10, fontSize: 0 }}
+                      animate={{ opacity: 1, x: 0, fontSize: "1em" }}
+                      exit={{ opacity: 0, x: 10, fontSize: 0 }}
                       css={{
-                        margin: `0 0 0 ${(Number(level) - 1) * 1}em`,
+                        gridArea: "a",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: ".4em",
                       }}
                     >
-                      {content}
-                    </a>
-                  ))
-                ) : (
-                  <p css={{ margin: 0, fontSize: ".9em", fontStyle: "italic" }}>
-                    La table des matières n'est pas disponible pour cette page.
-                  </p>
-                )}
+                      {tableOfContent ? (
+                        tableOfContent.map(({ level, content }, i) => (
+                          <a
+                            key={i}
+                            href={`#section-${i}`}
+                            css={{
+                              margin: `0 0 0 ${(Number(level) - 1) * 1}em`,
+                            }}
+                          >
+                            {content}
+                          </a>
+                        ))
+                      ) : (
+                        <p
+                          key="error.-1"
+                          css={{ margin: 0, fontSize: ".9em", fontStyle: "italic" }}
+                        >
+                          La table des matières n'est pas disponible pour cette page.
+                        </p>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </nav>
 
               {Object.entries(categories).map(([category, content]) => (
