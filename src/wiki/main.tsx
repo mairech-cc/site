@@ -27,8 +27,22 @@ function bindPage(key: string, metadata: Record<string, unknown>, page: string |
 }[], adapter: "markdown" | "react" | "unknown") {
   metadatas[key] = metadata;
   pages[key] = typeof page == "string" ? bindHtmlRenderer(key, page) : bindRenderer(key, page);
-  contents[key] = content;
+  contents[key] = reformatToc(content);
   adapters[key] = adapter;
+}
+
+function reformatToc(content: {
+  level: string;
+  content: string;
+}[]) {
+  return content.map(x => {
+    const span = document.createElement("span");
+    span.innerHTML = x.content;
+    const text = span.innerText;
+    span.remove();
+
+    return { level: x.level, content: text };
+  })
 }
 
 function bindHtmlRenderer(name: string, html: string) {
