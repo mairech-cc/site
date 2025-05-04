@@ -14,12 +14,18 @@ const parser = new DOMParser();
 import * as mainPage from "./pages/main.md";
 bindPage("main", mainPage.attributes, mainPage.html, mainPage.toc, "markdown");
 
-import * as max7219DotMatrix from "./pages/max7219-dot-matrix.md";
-bindPage("max7219-dot-matrix", max7219DotMatrix.attributes, max7219DotMatrix.html, max7219DotMatrix.toc, "markdown");
-
 import { AnnalesPage } from "./pages/annales";
 import { attributes as annalesAttributes, toc as annalesToc } from "./pages/annales-data";
 bindPage("annales", annalesAttributes, AnnalesPage, annalesToc, "react");
+
+import * as max7219DotMatrix from "./pages/max7219-dot-matrix.md";
+bindPage("max7219-dot-matrix", max7219DotMatrix.attributes, max7219DotMatrix.html, max7219DotMatrix.toc, "markdown");
+
+import * as physiqueQuantique from "./pages/physique-quantique.md";
+bindPage("physique-quantique", physiqueQuantique.attributes, physiqueQuantique.html, physiqueQuantique.toc, "markdown");
+
+import * as usage from "./pages/usage.md";
+bindPage("usage", usage.attributes, usage.html, usage.toc, "markdown");
 
 function bindPage(key: string, metadata: Record<string, unknown>, page: string | ComponentType, content: {
   level: string;
