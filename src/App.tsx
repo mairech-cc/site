@@ -108,24 +108,24 @@ function App() {
 
           <div css={{
             position: "absolute",
-              right: "1em",
-              top: "1em",
-              color: "black",
+            right: "1em",
+            top: "1em",
+            color: "black",
             display: "flex",
             flexDirection: "row-reverse",
             gap: "1em",
 
-              "@media (prefers-color-scheme: dark)": {
-                color: "white",
-              },
+            "@media (prefers-color-scheme: dark)": {
+              color: "white",
+            },
 
             "& > span": {
               cursor: "pointer",
             }
           }}>
             <span ref={refs.help}>
-            <IconInfoCircle />
-          </span>
+              <IconInfoCircle />
+            </span>
 
             <span ref={floatingRefs.setReference} {...getReferenceProps()}>
               <IconUser />
