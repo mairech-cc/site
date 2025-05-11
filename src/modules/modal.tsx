@@ -39,6 +39,7 @@ export default function Modal({
   children,
   shown,
   onClose,
+  rootId = "root",
   size = "auto",
   animate = "auto",
   allowEscape = true,
@@ -51,7 +52,7 @@ export default function Modal({
   children?: React.ReactNode;
   shown: boolean;
   onClose?: () => void;
-  zIndex?: number;
+  rootId?: string;
   size?: string;
   animate?: "auto" | "all" | "none";
   allowEscape?: boolean;
@@ -139,7 +140,7 @@ export default function Modal({
   return createPortal(
     <AnimatePresence>
       {lastShown == id && <Global styles={{
-        "#root": {
+        ["#" + rootId]: {
           filter: shown ? "blur(5px)" : "none",
           transition: animate == "none" ? "" : "filter .3s",
         }
@@ -210,13 +211,15 @@ export default function Modal({
   );
 }
 
-export function LoaderModal({ shown }: {
+export function LoaderModal({ shown, rootId }: {
   shown: boolean;
+  rootId?: string;
 }) {
   return (
     <Modal
       shown={shown}
       size="3em"
+      rootId={rootId}
       withCloseButton={false}
       withUi={false}
     >
