@@ -7,10 +7,13 @@ import createCache from "@emotion/cache";
 import { ConfettiContext } from "./modules/confetti";
 import { createBrowserRouter, Link, RouterProvider } from "react-router";
 import BaseLayout from "./layout.tsx";
+import { ApiProvider } from "./auth/main.tsx";
 
 const App = lazy(() => import("./App.tsx"));
 const Wiki = lazy(() => import("./Wiki.tsx"));
 const Linktree = lazy(() => import("./Linktree.tsx"));
+const AccountManager = lazy(() => import("./account/main.tsx"));
+const SignUp = lazy(() => import("./account/signup.tsx"));
 
 const cache = createCache({ key: "mairech-cc" });
 
@@ -32,6 +35,14 @@ const router = createBrowserRouter([
         path: "/@/:page",
         Component: Linktree,
       },
+      {
+        path: "/account",
+        Component: AccountManager,
+      },
+      {
+        path: "/account/signup/:state",
+        Component: SignUp,
+      },
     ]
   },
   {
@@ -43,9 +54,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CacheProvider value={cache}>
-      <ConfettiContext>
-        <RouterProvider router={router} />
-      </ConfettiContext>
+      <ApiProvider interval={30}>
+        <ConfettiContext>
+          <RouterProvider router={router} />
+        </ConfettiContext>
+      </ApiProvider>
     </CacheProvider>
   </StrictMode>,
 );
