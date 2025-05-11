@@ -11,12 +11,15 @@ import { Help } from "./modules/help/main";
 import { Discord } from "./modules/discord";
 import { Section } from "./modules/section";
 import { Title } from "./modules/title";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { IconInfoCircle, IconUser } from "@tabler/icons-react";
 import { LeafletMap } from "./modules/map/main";
 import { CPlayer } from "./modules/cplayer/main";
 import { Button } from "./modules/button";
 import { Link } from "react-router";
 import { useDocumentTitle } from "./utils/dom";
+import { offset, useClick, useDismiss, useFloating, useInteractions } from "@floating-ui/react";
+import { AnimatePresence } from "framer-motion";
+import AccountPopover from "./modules/accounts/popover";
 
 function App() {
   const confetti = useConfetti();
@@ -25,8 +28,24 @@ function App() {
   const [headerClicks, setHeaderClicks] = useState(0);
   const [invokeSpinjitzu, setInvokeSpinjitzu] = useState<null | (() => void)>(null);
   const [help, setHelp] = useState(false);
+  const [accountVisible, setAccountVisible] = useState(false);
   const [discord, setDiscord] = useState(false);
   const [title, setTitle] = useDocumentTitle();
+
+  const { refs: floatingRefs, floatingStyles, context } = useFloating({
+    placement: "bottom-end",
+    open: accountVisible,
+    onOpenChange: setAccountVisible,
+    transform: false,
+    middleware: [
+      offset(10),
+    ],
+  });
+
+  const click = useClick(context);
+  const dismiss = useDismiss(context);
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss]);
 
   useEffect(() => {
     if (title != "Nejib Mairech") {
@@ -87,22 +106,35 @@ function App() {
           {help && <Help />}
           {discord && <Discord />}
 
-          <span
-            ref={refs.help}
-            css={{
-              position: "fixed",
+          <div css={{
+            position: "absolute",
               right: "1em",
               top: "1em",
-              cursor: "pointer",
               color: "black",
+            display: "flex",
+            flexDirection: "row-reverse",
+            gap: "1em",
 
               "@media (prefers-color-scheme: dark)": {
                 color: "white",
               },
-            }}
-          >
+
+            "& > span": {
+              cursor: "pointer",
+            }
+          }}>
+            <span ref={refs.help}>
             <IconInfoCircle />
           </span>
+
+            <span ref={floatingRefs.setReference} {...getReferenceProps()}>
+              <IconUser />
+            </span>
+
+            <AnimatePresence>
+              {accountVisible && <AccountPopover ref={floatingRefs.setFloating} {...getFloatingProps()} style={floatingStyles} />}
+            </AnimatePresence>
+          </div>
 
           <Title ref={refs.title} />
 
