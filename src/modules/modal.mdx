@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/blocks";
+import Modal from "./modal";
+import { useState } from "react";
+import { Button } from './button';
+
+export function ModalShow() {
+  const [shown, setShown] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setShown(true)}>Ouvrir</Button>
+      <Modal
+        shown={shown}
+        rootId="storybook-docs"
+        title="Titre"
+        onClose={() => setShown(false)}
+      >
+        Contenu
+      </Modal>
+    </>
+  );
+}
+
+<Meta title="View/Modal/Docs" />
+
+`<Modal />` est le composant pour tous les overlays, pour les alerts.
+
+<ModalShow />
+
+```tsx
+function ModalDemo() {
+  const [shown, setShown] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setShown(true)}>Ouvrir</Button>
+
+      <Modal
+        shown={shown}
+        title="Titre"
+        onClose={() => setShown(false)}
+      >
+        Contenu
+      </Modal>
+    </>
+  );
+}
+```
+
+Fonctionnalités :
+
+* Fonctionne avec le thème utilisateur ;
+* Animations configurable :
+  * Animations visible par défaut, en respectant `prefers-reduced-motion` ;
+  * Possibilité de les forcer ou de les désactiver complètement.
+* Redimentionable ;
+* Style par défaut désactivable ;
+* Comportements modifiable (pas de bouton de fermeture, pas de clique dans le vide, pas de touche échap).
