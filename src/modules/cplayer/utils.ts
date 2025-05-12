@@ -1,5 +1,7 @@
 import cLang from "@shikijs/langs/c";
 import cppLang from "@shikijs/langs/cpp";
+import mdLang from "@shikijs/langs/md";
+import jsLang from "@shikijs/langs/js";
 import githubDark from "@shikijs/themes/github-dark";
 import { Instance } from "@wasmer/sdk";
 import { Terminal } from "@xterm/xterm";
@@ -7,7 +9,7 @@ import { createJavaScriptRegexEngine } from "shiki";
 import { createHighlighterCore } from "shiki/core";
 
 const shiki = await createHighlighterCore({
-  langs: [...cLang, ...cppLang],
+  langs: [...cLang, ...cppLang, ...mdLang, ...jsLang],
   themes: [githubDark],
   engine: createJavaScriptRegexEngine(),
 });
