@@ -6,7 +6,7 @@ import IconLoader from "../modules/loader";
 import { MagicApi, User } from "./wrapper/main";
 import { isAxiosError } from "axios";
 import { isCaptchaRequired } from "./api/common";
-import Modal from "../modules/modal";
+import Modal from "../components/modal/main";
 
 export function AuthProvider({ children, interval }: {
   children: React.ReactNode;

@@ -6,7 +6,7 @@ import { useApi } from "../auth/context";
 import { IconAlertTriangle, IconInfoCircle } from "@tabler/icons-react";
 import Turnstile from "react-turnstile";
 import { Button } from "../modules/button";
-import Modal, { LoaderModal } from "../modules/modal";
+import Modal, { LoaderModal } from "../components/modal/main";
 import { useDocumentTitle } from "../utils/dom";
 import { useConfetti } from "../modules/confetti";
 

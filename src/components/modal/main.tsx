@@ -3,12 +3,12 @@ import { IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useId, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { scrollbarsInvisible } from "./styles";
-import { AnimatedTooltip } from "./button";
+import { scrollbarsInvisible } from "../../modules/styles";
+import { AnimatedTooltip } from "../../modules/button";
 import { create } from "zustand";
 import { produce } from "immer";
-import { ZIndexProvider } from "./zindex/zindex";
-import IconLoader from "./loader";
+import { ZIndexProvider } from "../../modules/zindex/zindex";
+import IconLoader from "../../modules/loader";
 
 interface ShownModalStore {
   shownModals: string[];
