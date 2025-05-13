@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useFloating, useHover, useInteractions, offset, flip, shift, arrow as floatingArrow, autoPlacement } from "@floating-ui/react";
+import { useFloating, useHover, useInteractions, offset, flip, shift, arrow as floatingArrow } from "@floating-ui/react";
 import { createElement, forwardRef, Fragment, MouseEventHandler, PropsWithChildren, ReactNode, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
