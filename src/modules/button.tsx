@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 import { useFloating, useHover, useInteractions, offset, flip, shift, arrow as floatingArrow } from "@floating-ui/react";
 import { createElement, forwardRef, Fragment, MouseEventHandler, PropsWithChildren, ReactNode, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getAccessibleTextColor, theme, themed } from "../components/colors";
+
+const bg = theme("#f9f9f9", "#1a1a1a");
+const fg = getAccessibleTextColor(bg);
 
 export const Button = styled.button<{ scheme?: "light" | "dark" | "auto"; }>(props => ({
   borderRadius: "8px",
@@ -10,7 +14,6 @@ export const Button = styled.button<{ scheme?: "light" | "dark" | "auto"; }>(pro
   fontSize: "1em",
   fontWeight: "500",
   fontFamily: "inherit",
-  backgroundColor: "#1a1a1a",
   cursor: props.disabled ? "not-allowed" : "pointer",
   transition: "border-color .25s",
 
@@ -22,19 +25,10 @@ export const Button = styled.button<{ scheme?: "light" | "dark" | "auto"; }>(pro
     outline: "4px auto -webkit-focus-ring-color",
   },
 
-  ...props.scheme == "light" ? {
-    backgroundColor: "#f9f9f9",
-    color: "#000",
-  } : {},
-
-  ...(props.scheme == "auto" || !props.scheme) ? {
-    "@media (prefers-color-scheme: light)": {
-      "&": {
-        backgroundColor: "#f9f9f9",
-        color: "#000",
-      },
-    },
-  } : {},
+  ...themed(b => [
+    b("backgroundColor")`${bg}`,
+    b("color")`${fg}`,
+  ], props.scheme),
 }));
 
 export type ActionButtonProps = PropsWithChildren<{
