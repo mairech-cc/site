@@ -118,7 +118,7 @@ export function Help() {
     <>
       <div css={styles.menu}>
         <div css={styles.innerMenu}>
-          <span css={styles.header}>Activition</span>
+          <span css={styles.header}>Activation</span>
           <span css={styles.header}>Description</span>
           <span css={styles.header}>De</span>
 
