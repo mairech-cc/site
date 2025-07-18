@@ -1,9 +1,10 @@
 import { describe, it, expect, spyOn } from "bun:test";
 import { themed, palette, ThemedCSSObject, darkValue } from "./colors";
+import { getAccessibleTextColor, ThemeColor } from "./colors";
 
 describe("themed", () => {
   it("generates light/dark CSSObject with ThemeColor expressions", () => {
-    const style = themed(b => 
+    const style = themed(b =>
       b("color")`${palette.alert}`("border")`1px solid ${palette.border}`
     );
 
@@ -59,5 +60,49 @@ describe("themed", () => {
 
     expect(spy).toHaveBeenCalledWith("Received an undefined value");
     spy.mockRestore();
+  });
+
+  it("supports strings interpolation", () => {
+    const style = themed(b => b("border")`1px solid ${"red"}`);
+
+    const ret = { border: "1px solid red" };
+    expect(style).toEqual({ ...ret, [darkValue]: ret });
+  });
+});
+
+describe("getAccessibleTextColor", () => {
+  it("returns dark text for light backgrounds", () => {
+    const bg = "#ffffff";
+    const result = getAccessibleTextColor(bg);
+    expect(result.light).toBe(palette.text.dark);
+    expect(result.dark).toBe(palette.text.dark);
+  });
+
+  it("returns light text for dark backgrounds", () => {
+    const bg = "#000000";
+    const result = getAccessibleTextColor(bg);
+    expect(result.light).toBe(palette.text.light);
+    expect(result.dark).toBe(palette.text.light);
+  });
+
+  it("handles ThemeColor input", () => {
+    const bg: ThemeColor = { light: "#f8f9fa", dark: "#121212" };
+    const result = getAccessibleTextColor(bg);
+    expect(result.light).toBe(palette.text.dark);
+    expect(result.dark).toBe(palette.text.light);
+  });
+
+  it("returns correct text color for mid-tone backgrounds", () => {
+    const bg = "#888888";
+    const result = getAccessibleTextColor(bg);
+    // #888888 has luminance > 0.179, so should return dark text
+    expect(result.light).toBe(palette.text.dark);
+    expect(result.dark).toBe(palette.text.dark);
+  });
+
+  it("throws on invalid hex color", () => {
+    expect(() => getAccessibleTextColor("#fff")).toThrowError();
+    expect(() => getAccessibleTextColor("#12345")).toThrowError();
+    expect(() => getAccessibleTextColor("not-a-color")).toThrowError();
   });
 });
