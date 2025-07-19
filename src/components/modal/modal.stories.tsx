@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import Modal, { LoaderModal } from "./main";
-import { fn } from "@storybook/test";
+import { fn } from "storybook/test";
 
 const meta = {
   title: "View/Modal",
@@ -15,6 +15,7 @@ const meta = {
     allowClickOutside: { control: "boolean" },
     withUi: { control: "boolean" },
     withCloseButton: { control: "boolean" },
+    position: { control: "select", options: ["center", "bottom"] }
   },
   args: {
     onClose: fn(),
@@ -30,6 +31,16 @@ export const Default: Story = {
     title: "Titre",
     children: "Contenu",
     size: "250px",
+  },
+};
+
+export const Bottom: Story = {
+  args: {
+    shown: true,
+    title: "Titre",
+    children: "Contenu",
+    size: "250px",
+    position: "bottom",
   },
 };
 
