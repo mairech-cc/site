@@ -1,5 +1,5 @@
 import { describe, it, expect, spyOn } from "bun:test";
-import { themed, palette, ThemedCSSObject, darkValue } from "./colors";
+import { themed, palette, ThemedCSSObject, darkValue, opposite, theme } from "./colors";
 import { getAccessibleTextColor, ThemeColor } from "./colors";
 
 describe("themed", () => {
@@ -104,5 +104,15 @@ describe("getAccessibleTextColor", () => {
     expect(() => getAccessibleTextColor("#fff")).toThrowError();
     expect(() => getAccessibleTextColor("#12345")).toThrowError();
     expect(() => getAccessibleTextColor("not-a-color")).toThrowError();
+  });
+});
+
+describe("opposite", () => {
+  it("handles correct theme swap", () => {
+    expect(opposite(palette.black)).toEqual(palette.black);
+    expect(opposite(palette.white)).toEqual(palette.white);
+    const basicColor = theme(palette.white, palette.black);
+    const opposed = theme(palette.black, palette.white);
+    expect(opposite(basicColor)).toEqual(opposed);
   });
 });

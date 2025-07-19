@@ -20,6 +20,10 @@ export function theme(light: string | ThemeColor, dark: string | ThemeColor): Th
   };
 }
 
+export function opposite(color: ThemeColor): ThemeColor {
+  return { light: color.dark, dark: color.light };
+}
+
 const white = uniqueColor("#ffffff");
 const black = uniqueColor("#000000");
 const text = theme(white, black);
