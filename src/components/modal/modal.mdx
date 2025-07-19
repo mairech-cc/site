@@ -1,15 +1,16 @@
-import { Meta } from "@storybook/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
 import Modal from "./main";
 import { useState } from "react";
 import { Button } from '../../modules/button';
 
-export function ModalShow() {
+export function ModalShow(props) {
   const [shown, setShown] = useState(false);
 
   return (
     <>
       <Button scheme="light" onClick={() => setShown(true)}>Ouvrir</Button>
       <Modal
+        {...props}
         shown={shown}
         rootId="storybook-docs"
         title="Titre"
@@ -54,5 +55,8 @@ Fonctionnalités :
   * Animations visible par défaut, en respectant `prefers-reduced-motion` ;
   * Possibilité de les forcer ou de les désactiver complètement.
 * Redimentionable ;
+* Positionnable au centre ou en bas ;
 * Style par défaut désactivable ;
 * Comportements modifiable (pas de bouton de fermeture, pas de clique dans le vide, pas de touche échap).
+
+En bas: <ModalShow position="bottom" />
