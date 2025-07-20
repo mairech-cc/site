@@ -127,9 +127,10 @@ export function Tooltip({ children, tooltip, className }: TooltipProps) {
 export interface AnimatedTooltipProps {
   content: React.ReactNode;
   children: React.ReactNode;
+  className?: string;
 }
 
-export function AnimatedTooltip({ content, children }: AnimatedTooltipProps) {
+export function AnimatedTooltip({ content, children, className }: AnimatedTooltipProps) {
   const [open, setOpen] = useState(false);
   const arrowRef = useRef<HTMLDivElement>(null);
 
@@ -165,6 +166,7 @@ export function AnimatedTooltip({ content, children }: AnimatedTooltipProps) {
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
         style={{ display: "inline-block" }}
+        className={className}
       >
         {children}
       </div>
