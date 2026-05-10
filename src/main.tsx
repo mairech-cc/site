@@ -7,6 +7,7 @@ import createCache from "@emotion/cache";
 import { ConfettiContext } from "./modules/confetti";
 import { createBrowserRouter, Link, RouterProvider } from "react-router";
 import BaseLayout from "./layout.tsx";
+import CookiesConsent from "./consent/ui.tsx";
 
 const App = lazy(() => import("./App.tsx"));
 const Wiki = lazy(() => import("./Wiki.tsx"));
@@ -44,6 +45,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CacheProvider value={cache}>
       <ConfettiContext>
+        <CookiesConsent />
         <RouterProvider router={router} />
       </ConfettiContext>
     </CacheProvider>
