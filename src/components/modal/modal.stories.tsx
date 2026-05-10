@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Modal, { LoaderModal } from "./modal";
+import Modal, { LoaderModal } from "./main";
 import { fn } from "@storybook/test";
 
 const meta = {
