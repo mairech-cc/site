@@ -32,7 +32,7 @@ export function LeafletMapImpl({ className }: { className: string; }) {
       center: [47.731158, 7.3012456],
       zoom: 14,
       layers: [
-        L.tileLayer("https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ")
+        L.tileLayer("https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png")
       ],
     });
 

@@ -68,7 +68,7 @@ export const Title = forwardRef<HTMLHeadingElement>((_, ref) => {
     queueMicrotask(() => {
       const span = firstSpanRef.current;
 
-      if (span && window.innerWidth - 30 <= span.clientWidth) {
+      if (span && window.innerWidth - 64 <= span.clientWidth) {
         setTimeout(() => {
           startMarquee(span, 8000);
         }, 100);
@@ -99,7 +99,7 @@ export const Title = forwardRef<HTMLHeadingElement>((_, ref) => {
           child.style.visibility = "visible";
           const animation = child.animate(ANIMATIONS.show, { duration: 500 });
           animation.addEventListener("finish", () => {
-            if (window.innerWidth - 30 <= child.clientWidth) {
+            if (window.innerWidth - 64 <= child.clientWidth) {
               setTimeout(() => {
                 startMarquee(child, 8000);
               }, 100);

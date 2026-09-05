@@ -66,5 +66,8 @@ export default defineConfig({
       methods: ["GET", "OPTIONS"],
     },
     allowedHosts: true,
+    proxy: {
+      "/magic": "http://localhost:3000",
+    }
   },
 });

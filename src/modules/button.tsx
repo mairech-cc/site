@@ -1,16 +1,20 @@
 import styled from "@emotion/styled";
-import { useFloating, useHover, useInteractions } from "@floating-ui/react";
-import { createElement, forwardRef, Fragment, MouseEventHandler, PropsWithChildren, ReactNode, useState } from "react";
+import { useFloating, useHover, useInteractions, offset, flip, shift, arrow as floatingArrow } from "@floating-ui/react";
+import { createElement, forwardRef, Fragment, MouseEventHandler, PropsWithChildren, ReactNode, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { getAccessibleTextColor, theme, themed } from "../components/colors";
 
-export const Button = styled.button({
+const bg = theme("#f9f9f9", "#1a1a1a");
+const fg = getAccessibleTextColor(bg);
+
+export const Button = styled.button<{ scheme?: "light" | "dark" | "auto"; }>(props => ({
   borderRadius: "8px",
   border: "1px solid transparent",
   padding: ".6em 1.2em",
   fontSize: "1em",
   fontWeight: "500",
   fontFamily: "inherit",
-  backgroundColor: "#1a1a1a",
-  cursor: "pointer",
+  cursor: props.disabled ? "not-allowed" : "pointer",
   transition: "border-color .25s",
 
   "&:hover": {
@@ -21,12 +25,11 @@ export const Button = styled.button({
     outline: "4px auto -webkit-focus-ring-color",
   },
 
-  "@media (prefers-color-scheme: light)": {
-    "&": {
-      backgroundColor: "#f9f9f9",
-    },
-  },
-});
+  ...themed(b => [
+    b("backgroundColor")`${bg}`,
+    b("color")`${fg}`,
+  ], props.scheme),
+}));
 
 export type ActionButtonProps = PropsWithChildren<{
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -120,3 +123,91 @@ export function Tooltip({ children, tooltip, className }: TooltipProps) {
     )
   );
 };
+
+export interface AnimatedTooltipProps {
+  content: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function AnimatedTooltip({ content, children, className }: AnimatedTooltipProps) {
+  const [open, setOpen] = useState(false);
+  const arrowRef = useRef<HTMLDivElement>(null);
+
+  const { x, y, refs, strategy, middlewareData } = useFloating({
+    placement: "top",
+    middleware: [
+      offset(8),
+      flip(),
+      shift({ padding: 5 }),
+      floatingArrow({ element: arrowRef }),
+    ],
+  });
+
+  const staticSide = {
+    top: "bottom",
+    right: "left",
+    bottom: "top",
+    left: "right",
+  }["top"];
+
+  const arrowStyle = middlewareData.arrow
+    ? {
+      left: middlewareData.arrow.x != null ? `${middlewareData.arrow.x}px` : "",
+      top: middlewareData.arrow.y != null ? `${middlewareData.arrow.y}px` : "",
+      [staticSide]: "-4px",
+    }
+    : {};
+
+  return (
+    <>
+      <div
+        ref={refs.setReference}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        style={{ display: "inline-block" }}
+        className={className}
+      >
+        {children}
+      </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            ref={refs.setFloating}
+            style={{
+              position: strategy,
+              top: y ?? 0,
+              left: x ?? 0,
+              background: "#333",
+              color: "#fff",
+              padding: "8px 12px",
+              borderRadius: "4px",
+              fontSize: "0.85rem",
+              zIndex: 9999,
+            }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            {content}
+
+            {/* Arrow element */}
+            <div
+              ref={arrowRef}
+              style={{
+                position: "absolute",
+                width: "8px",
+                height: "8px",
+                background: "#333",
+                transform: "rotate(45deg)",
+                ...arrowStyle,
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

@@ -1,44 +1,21 @@
 import { Global } from "@emotion/react";
 import { IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useId, useMemo, useState } from "react";
+import { ReactNode, useEffect, useId, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { scrollbarsInvisible } from "./styles";
-import { AnimatedTooltip } from "./button";
-import { create } from "zustand";
-import { produce } from "immer";
-import { ZIndexProvider } from "./zindex/zindex";
-import IconLoader from "./loader";
-
-interface ShownModalStore {
-  shownModals: string[];
-  nextId: number;
-
-  add(id: string): void;
-  remove(id: string): void;
-  getNewId(): number;
-}
-
-const useShownModals = create<ShownModalStore>()((set, get) => ({
-  shownModals: [],
-  nextId: 0,
-
-  add: id => set(prev => produce(prev, prev => {
-    prev.shownModals.push(id)
-  })),
-  remove: id => set(prev => produce(prev, prev => {
-    prev.shownModals = prev.shownModals.filter(x => x != id)
-  })),
-  getNewId: () => (set(prev => produce(prev, prev => {
-    prev.nextId++
-  })), get().nextId - 1),
-}));
+import { scrollbarsInvisible } from "../styles.ts";
+import { AnimatedTooltip } from "../../modules/button";
+import { ZIndexProvider } from "../../modules/zindex/zindex";
+import IconLoader from "../../modules/loader";
+import { ModalBlurContext, useShownModals } from "./context";
 
 export default function Modal({
   title,
   children,
+  containerRef,
   shown,
   onClose,
+  rootId = "root",
   size = "auto",
   animate = "auto",
   allowEscape = true,
@@ -46,12 +23,14 @@ export default function Modal({
   withUi = true,
   withCloseButton = true,
   className,
+  position = "center",
 }: {
   title?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
+  containerRef?: React.Ref<HTMLDivElement>;
   shown: boolean;
   onClose?: () => void;
-  zIndex?: number;
+  rootId?: string;
   size?: string;
   animate?: "auto" | "all" | "none";
   allowEscape?: boolean;
@@ -59,6 +38,7 @@ export default function Modal({
   withUi?: boolean;
   withCloseButton?: boolean;
   className?: string;
+  position?: "center" | "bottom";
 }) {
   const id = useId();
   const modals = useShownModals(v => v.shownModals);
@@ -139,7 +119,7 @@ export default function Modal({
   return createPortal(
     <AnimatePresence>
       {lastShown == id && <Global styles={{
-        "#root": {
+        ["#" + rootId]: {
           filter: shown ? "blur(5px)" : "none",
           transition: animate == "none" ? "" : "filter .3s",
         }
@@ -158,7 +138,7 @@ export default function Modal({
           inset: 0,
           overflow: "hidden",
           display: "grid",
-          placeItems: "center",
+          placeItems: position == "center" ? "center" : "end center",
         }}
         id={`modal-content-${id}`}
         aria-hidden={!shown}
@@ -166,6 +146,7 @@ export default function Modal({
       >
         <div
           className={className}
+          ref={containerRef}
           css={[{
             display: "flex",
             flexDirection: "column",
@@ -201,7 +182,9 @@ export default function Modal({
           </div>}
 
           <ZIndexProvider min={zIndex + 1} max={zIndex + 300}>
-            {children}
+            <ModalBlurContext.Provider value={lastShown != id}>
+              {children}
+            </ModalBlurContext.Provider>
           </ZIndexProvider>
         </div>
       </motion.div>}
@@ -210,13 +193,15 @@ export default function Modal({
   );
 }
 
-export function LoaderModal({ shown }: {
+export function LoaderModal({ shown, rootId }: {
   shown: boolean;
+  rootId?: string;
 }) {
   return (
     <Modal
       shown={shown}
       size="3em"
+      rootId={rootId}
       withCloseButton={false}
       withUi={false}
     >
